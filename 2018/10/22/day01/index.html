@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Django安装与配置 | Greencap</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一.安装虚拟环境1.安装virtualenv 1pip install virtualenv 2.创建虚拟环境 1virtualenv --no-site-packages -p &amp;lt;python目录(可不写默认)&amp;gt; &amp;lt;新文件名&amp;gt; 3.进入虚拟环境 1cd env/Scripts/ 执行activate命令 退出的deactivate命令 4.pip使用 1234&amp;gt;&amp;g">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django安装与配置">
+<meta property="og:url" content="http://yoursite.com/2018/10/22/day01/index.html">
+<meta property="og:site_name" content="Greencap">
+<meta property="og:description" content="一.安装虚拟环境1.安装virtualenv 1pip install virtualenv 2.创建虚拟环境 1virtualenv --no-site-packages -p &amp;lt;python目录(可不写默认)&amp;gt; &amp;lt;新文件名&amp;gt; 3.进入虚拟环境 1cd env/Scripts/ 执行activate命令 退出的deactivate命令 4.pip使用 1234&amp;gt;&amp;g">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-10-23T12:05:32.377Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Django安装与配置">
+<meta name="twitter:description" content="一.安装虚拟环境1.安装virtualenv 1pip install virtualenv 2.创建虚拟环境 1virtualenv --no-site-packages -p &amp;lt;python目录(可不写默认)&amp;gt; &amp;lt;新文件名&amp;gt; 3.进入虚拟环境 1cd env/Scripts/ 执行activate命令 退出的deactivate命令 4.pip使用 1234&amp;gt;&amp;g">
+  
+    <link rel="alternate" href="/atom.xml" title="Greencap" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Greencap</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-day01" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/10/22/day01/" class="article-date">
+  <time datetime="2018-10-22T11:50:01.310Z" itemprop="datePublished">2018-10-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Django安装与配置
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="一-安装虚拟环境"><a href="#一-安装虚拟环境" class="headerlink" title="一.安装虚拟环境"></a>一.安装虚拟环境</h5><p>1.安装virtualenv</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install virtualenv</span><br></pre></td></tr></table></figure>
+<p>2.创建虚拟环境</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virtualenv --no-site-packages -p &lt;python目录(可不写默认)&gt; &lt;新文件名&gt;</span><br></pre></td></tr></table></figure>
+<p>3.进入虚拟环境</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> env/Scripts/ 执行activate命令 退出的deactivate命令</span><br></pre></td></tr></table></figure>
+<p>4.pip使用</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;查看虚拟环境下安装的包</span><br><span class="line">pip list</span><br><span class="line">&gt;&gt;&gt;查看通过pip安装的包</span><br><span class="line">pip freeze</span><br></pre></td></tr></table></figure>
+<h5 id="二-创建Django项目"><a href="#二-创建Django项目" class="headerlink" title="二.创建Django项目"></a>二.创建Django项目</h5><p>1.在虚拟环境中安装django</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install django==<span class="number">1</span>.<span class="number">11</span></span><br></pre></td></tr></table></figure>
+<p>2.创建项目(创建一个新的文件夹保存项目)</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin startproject &lt;项目名称&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>manage.py</strong>  是Django用于管理项目的管理集工具</p>
+<p><strong>init.py</strong>  初始化工具</p>
+<p><strong>settings.py</strong>  配置文件</p>
+<p><strong>urls.py</strong>  项目的url路由映射</p>
+<p><strong>wsgi.py</strong>  定义WSGI接口信息</p>
+<h5 id="三-设置Django"><a href="#三-设置Django" class="headerlink" title="三.设置Django"></a>三.设置Django</h5><p>1.修改settings.py配置</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置有权限访问的ip为全部</span></span><br><span class="line">ALLOWED_HOSTS = [<span class="string">'*'</span>]</span><br><span class="line"><span class="comment"># 和mysql数据链接</span></span><br><span class="line">DATABASES = &#123;</span><br><span class="line">    <span class="string">'default'</span>: &#123;</span><br><span class="line">        <span class="string">'ENGINE'</span>: <span class="string">'django.db.backends.mysql'</span>,</span><br><span class="line">        <span class="string">'NAME'</span>: <span class="string">'greencap'</span>,  <span class="comment"># mysql的库名</span></span><br><span class="line">        <span class="string">'USER'</span>: <span class="string">'root'</span>,      <span class="comment"># 用户名</span></span><br><span class="line">        <span class="string">'PASSWORD'</span>: <span class="string">'*****'</span>,</span><br><span class="line">        <span class="string">'HOST'</span>: <span class="string">'127.0.0.1'</span>,</span><br><span class="line">        <span class="string">'PORT'</span>: <span class="number">3306</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2.安装pymysql</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pymysql</span><br></pre></td></tr></table></figure>
+<p>3.配置init.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line">pymysql.install_as_MySQLdb()</span><br></pre></td></tr></table></figure>
+<p>4.迁移</p>
+<p><code>python manage.py migrate</code></p>
+<p>5.创建超级管理员命令</p>
+<p><code>manage.py createsuperuser</code></p>
+<p>6.运行Django项目</p>
+<p><code>python manage.py runserver  port/host:port</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/10/22/day01/" data-id="cjnlqm77s0000wgve09xk6y8c" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/10/23/day02/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/09/30/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/10/23/day02/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/22/day01/">Django安装与配置</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/30/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

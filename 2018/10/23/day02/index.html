@@ -5,14 +5,17 @@
   
   <title>Greencap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
+  <meta name="description" content="title: APP的创建与配置 一.创建应用apppython manage.py startapp &amp;lt;文件名&amp;gt; 二.导入视图,创建连接1.设置urls.py 123456789from &amp;lt;文件名&amp;gt; import viewsurlpatterns = [    # 127.0.0.1:8080/admin/    url(r&apos;^admin/&apos;, admin.site.ur">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Greencap">
 <meta property="og:url" content="http://yoursite.com/2018/10/23/day02/index.html">
 <meta property="og:site_name" content="Greencap">
+<meta property="og:description" content="title: APP的创建与配置 一.创建应用apppython manage.py startapp &amp;lt;文件名&amp;gt; 二.导入视图,创建连接1.设置urls.py 123456789from &amp;lt;文件名&amp;gt; import viewsurlpatterns = [    # 127.0.0.1:8080/admin/    url(r&apos;^admin/&apos;, admin.site.ur">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-23T02:09:07.646Z">
+<meta property="og:updated_time" content="2018-10-23T12:57:57.839Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Greencap">
+<meta name="twitter:description" content="title: APP的创建与配置 一.创建应用apppython manage.py startapp &amp;lt;文件名&amp;gt; 二.导入视图,创建连接1.设置urls.py 123456789from &amp;lt;文件名&amp;gt; import viewsurlpatterns = [    # 127.0.0.1:8080/admin/    url(r&apos;^admin/&apos;, admin.site.ur">
   
     <link rel="alternate" href="/atom.xml" title="Greencap" type="application/atom+xml">
   
@@ -73,11 +76,29 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>title: APP的创建与配置</p>
+<h5 id="一-创建应用app"><a href="#一-创建应用app" class="headerlink" title="一.创建应用app"></a>一.创建应用app</h5><p><code>python manage.py startapp &lt;文件名&gt;</code></p>
+<h5 id="二-导入视图-创建连接"><a href="#二-导入视图-创建连接" class="headerlink" title="二.导入视图,创建连接"></a>二.导入视图,创建连接</h5><p>1.设置urls.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> &lt;文件名&gt; <span class="keyword">import</span> views</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    <span class="comment"># 127.0.0.1:8080/admin/</span></span><br><span class="line">    url(<span class="string">r'^admin/'</span>, admin.site.urls),</span><br><span class="line">    <span class="comment"># 127.0.0.1:8080/hello/</span></span><br><span class="line">    url(<span class="string">r'^hello/'</span>, views.hello),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>2.在app下的views.py中添加方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">from django.http import HttpResponse</span><br><span class="line"></span><br><span class="line">def hello(request):</span><br><span class="line">    return HttpResponse(&apos;hi,good morning!&apos;)</span><br></pre></td></tr></table></figure>
+<p>3.在浏览器输入对应地址可得到返回值</p>
+<h5 id="三-创建models"><a href="#三-创建models" class="headerlink" title="三.创建models"></a>三.创建models</h5><p>1.在app下的models.py中添加模型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    <span class="comment"># 定义s_name字段, varchar类型, 最长不超过六个字符, 唯一</span></span><br><span class="line">    s_name = models.CharField(max_length=<span class="number">6</span>, unique=<span class="keyword">True</span>)</span><br><span class="line">    <span class="comment"># 定义s_age字段, int类型</span></span><br><span class="line">    s_age = models.IntegerField(default=<span class="number">18</span>)</span><br><span class="line">    <span class="comment"># 定义s_gender字段, int类型</span></span><br><span class="line">    s_gender = models.BooleanField(default=<span class="number">1</span>)</span><br><span class="line">    <span class="comment"># 定义create_time字段, 创建时间</span></span><br><span class="line">    create_time = models.DateTimeField(auto_now_add=<span class="keyword">True</span>, null=<span class="keyword">True</span>)</span><br><span class="line">    <span class="comment"># 定义operate_time字段, 修改时间</span></span><br><span class="line">    operate_time = models.DateTimeField(auto_now=<span class="keyword">True</span>, null=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        <span class="comment"># 定义模型迁移到数据库中的表名</span></span><br><span class="line">        db_table = <span class="string">'student'</span></span><br></pre></td></tr></table></figure>
+<p>2.设置settings.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">INSTALLED_APPS = [</span><br><span class="line">    <span class="string">'django.contrib.admin'</span>,</span><br><span class="line">    <span class="string">'django.contrib.auth'</span>,</span><br><span class="line">    <span class="string">'django.contrib.contenttypes'</span>,</span><br><span class="line">    <span class="string">'django.contrib.sessions'</span>,</span><br><span class="line">    <span class="string">'django.contrib.messages'</span>,</span><br><span class="line">    <span class="string">'django.contrib.staticfiles'</span>,</span><br><span class="line">    <span class="comment"># 添加文件名</span></span><br><span class="line">    <span class="string">'app'</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>3.生成迁移文件0001_initial.py</p>
+<p><code>python manage.py makemigrations</code></p>
+<p>4.执行迁移文件</p>
+<p><code>python manage.py migrate</code></p>
+<h5 id="四-添加数据"><a href="#四-添加数据" class="headerlink" title="四.添加数据"></a>四.添加数据</h5><p>1.配置urls.py</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span><br><span class="line">    # 127.0.0.1:8080/admin/</span><br><span class="line">    url(r&apos;^admin/&apos;, admin.site.urls),</span><br><span class="line">    # 127.0.0.1:8080/hello/</span><br><span class="line">    url(r&apos;^hello/&apos;, views.hello),</span><br><span class="line">    # 127.0.0.1:8080/create_stu/</span><br><span class="line">    url(r&apos;^create_stu/&apos;, views.create_stu),</span><br><span class="line">    url(r&apos;^sel_stu/&apos;, views.sel_stu),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>2.</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/10/23/day02/" data-id="cjnl8cqid0000tcveeos83xgo" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/10/23/day02/" data-id="cjnlqm7950001wgve5j8h3k3s" class="article-share-link">Share</a>
       
       
     </footer>
@@ -87,9 +108,9 @@
 <nav id="article-nav">
   
   
-    <a href="/2018/10/22/Django/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/10/22/day01/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Django安装</div>
+      <div class="article-nav-title">Django安装与配置</div>
     </a>
   
 </nav>
@@ -130,7 +151,7 @@
           </li>
         
           <li>
-            <a href="/2018/10/22/Django/">Django安装</a>
+            <a href="/2018/10/22/day01/">Django安装与配置</a>
           </li>
         
           <li>

@@ -74,11 +74,29 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>title: APP的创建与配置</p>
+<h5 id="一-创建应用app"><a href="#一-创建应用app" class="headerlink" title="一.创建应用app"></a>一.创建应用app</h5><p><code>python manage.py startapp &lt;文件名&gt;</code></p>
+<h5 id="二-导入视图-创建连接"><a href="#二-导入视图-创建连接" class="headerlink" title="二.导入视图,创建连接"></a>二.导入视图,创建连接</h5><p>1.设置urls.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> &lt;文件名&gt; <span class="keyword">import</span> views</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    <span class="comment"># 127.0.0.1:8080/admin/</span></span><br><span class="line">    url(<span class="string">r'^admin/'</span>, admin.site.urls),</span><br><span class="line">    <span class="comment"># 127.0.0.1:8080/hello/</span></span><br><span class="line">    url(<span class="string">r'^hello/'</span>, views.hello),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>2.在app下的views.py中添加方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">from django.http import HttpResponse</span><br><span class="line"></span><br><span class="line">def hello(request):</span><br><span class="line">    return HttpResponse(&apos;hi,good morning!&apos;)</span><br></pre></td></tr></table></figure>
+<p>3.在浏览器输入对应地址可得到返回值</p>
+<h5 id="三-创建models"><a href="#三-创建models" class="headerlink" title="三.创建models"></a>三.创建models</h5><p>1.在app下的models.py中添加模型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    <span class="comment"># 定义s_name字段, varchar类型, 最长不超过六个字符, 唯一</span></span><br><span class="line">    s_name = models.CharField(max_length=<span class="number">6</span>, unique=<span class="keyword">True</span>)</span><br><span class="line">    <span class="comment"># 定义s_age字段, int类型</span></span><br><span class="line">    s_age = models.IntegerField(default=<span class="number">18</span>)</span><br><span class="line">    <span class="comment"># 定义s_gender字段, int类型</span></span><br><span class="line">    s_gender = models.BooleanField(default=<span class="number">1</span>)</span><br><span class="line">    <span class="comment"># 定义create_time字段, 创建时间</span></span><br><span class="line">    create_time = models.DateTimeField(auto_now_add=<span class="keyword">True</span>, null=<span class="keyword">True</span>)</span><br><span class="line">    <span class="comment"># 定义operate_time字段, 修改时间</span></span><br><span class="line">    operate_time = models.DateTimeField(auto_now=<span class="keyword">True</span>, null=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        <span class="comment"># 定义模型迁移到数据库中的表名</span></span><br><span class="line">        db_table = <span class="string">'student'</span></span><br></pre></td></tr></table></figure>
+<p>2.设置settings.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">INSTALLED_APPS = [</span><br><span class="line">    <span class="string">'django.contrib.admin'</span>,</span><br><span class="line">    <span class="string">'django.contrib.auth'</span>,</span><br><span class="line">    <span class="string">'django.contrib.contenttypes'</span>,</span><br><span class="line">    <span class="string">'django.contrib.sessions'</span>,</span><br><span class="line">    <span class="string">'django.contrib.messages'</span>,</span><br><span class="line">    <span class="string">'django.contrib.staticfiles'</span>,</span><br><span class="line">    <span class="comment"># 添加文件名</span></span><br><span class="line">    <span class="string">'app'</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>3.生成迁移文件0001_initial.py</p>
+<p><code>python manage.py makemigrations</code></p>
+<p>4.执行迁移文件</p>
+<p><code>python manage.py migrate</code></p>
+<h5 id="四-添加数据"><a href="#四-添加数据" class="headerlink" title="四.添加数据"></a>四.添加数据</h5><p>1.配置urls.py</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span><br><span class="line">    # 127.0.0.1:8080/admin/</span><br><span class="line">    url(r&apos;^admin/&apos;, admin.site.urls),</span><br><span class="line">    # 127.0.0.1:8080/hello/</span><br><span class="line">    url(r&apos;^hello/&apos;, views.hello),</span><br><span class="line">    # 127.0.0.1:8080/create_stu/</span><br><span class="line">    url(r&apos;^create_stu/&apos;, views.create_stu),</span><br><span class="line">    url(r&apos;^sel_stu/&apos;, views.sel_stu),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>2.</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/10/23/day02/" data-id="cjnl8cqid0000tcveeos83xgo" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/10/23/day02/" data-id="cjnlqm7950001wgve5j8h3k3s" class="article-share-link">Share</a>
       
       
     </footer>
@@ -88,10 +106,10 @@
 
 
   
-    <article id="post-Django" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-day01" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/10/22/Django/" class="article-date">
-  <time datetime="2018-10-22T11:50:01.000Z" itemprop="datePublished">2018-10-22</time>
+    <a href="/2018/10/22/day01/" class="article-date">
+  <time datetime="2018-10-22T11:50:01.310Z" itemprop="datePublished">2018-10-22</time>
 </a>
     
   </div>
@@ -102,7 +120,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/22/Django/">Django安装</a>
+      <a class="article-title" href="/2018/10/22/day01/">Django安装与配置</a>
     </h1>
   
 
@@ -110,26 +128,40 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>10.22  </p>
-<p>MVC:M(模型层) V(视图层) C(业务层)<br>Django ==&gt; MVT<br>M(模型层) V(视图):处理业务逻辑 T(模板):html</p>
-<p>virtualenv虚拟环境创建</p>
-<p>pip install virtualenv<br>virtualenv –no-site-packages -p D:\python\python.exe djenv(名字自己取)<br>进入 cd env/Scripts 在activate命令<br>退出 deactivate</p>
-<p>*pip使用<br>pip list<br>pip freeze</p>
-<p>安装django<br>pip install django==1.11<br>pip install PyMySQL</p>
-<p>django-admin startproject day01<br>python manage.py<br>python manage.py runserver 端口/IP地址:端口</p>
-<p>MySQL链接数据</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">DATABASES = &#123;</span><br><span class="line">    &apos;default&apos;: &#123;</span><br><span class="line">        &apos;ENGINE&apos;: &apos;django.db.backends.mysql&apos;,</span><br><span class="line">        &apos;NAME&apos;: &apos;&apos;,</span><br><span class="line">        &apos;USER&apos;: &apos;root&apos;,</span><br><span class="line">        &apos;PASSWORD&apos;: &apos;&apos;,</span><br><span class="line">        &apos;HOST&apos;: &apos;&apos;,</span><br><span class="line">        &apos;PORT&apos;: 3306</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>init配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import pymysql</span><br><span class="line"></span><br><span class="line">pymysql.install_as_MySQLdb()</span><br></pre></td></tr></table></figure>
-<p>迁移:</p>
-<p>(djenv6) D:\wordspace\day01&gt;python manage.py migrate</p>
-<p>创建超级管理员命令</p>
-<p>(djenv6) D:\wordspace\day01&gt;python manage.py createsuperuser</p>
+        <h5 id="一-安装虚拟环境"><a href="#一-安装虚拟环境" class="headerlink" title="一.安装虚拟环境"></a>一.安装虚拟环境</h5><p>1.安装virtualenv</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install virtualenv</span><br></pre></td></tr></table></figure>
+<p>2.创建虚拟环境</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virtualenv --no-site-packages -p &lt;python目录(可不写默认)&gt; &lt;新文件名&gt;</span><br></pre></td></tr></table></figure>
+<p>3.进入虚拟环境</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> env/Scripts/ 执行activate命令 退出的deactivate命令</span><br></pre></td></tr></table></figure>
+<p>4.pip使用</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;查看虚拟环境下安装的包</span><br><span class="line">pip list</span><br><span class="line">&gt;&gt;&gt;查看通过pip安装的包</span><br><span class="line">pip freeze</span><br></pre></td></tr></table></figure>
+<h5 id="二-创建Django项目"><a href="#二-创建Django项目" class="headerlink" title="二.创建Django项目"></a>二.创建Django项目</h5><p>1.在虚拟环境中安装django</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install django==<span class="number">1</span>.<span class="number">11</span></span><br></pre></td></tr></table></figure>
+<p>2.创建项目(创建一个新的文件夹保存项目)</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin startproject &lt;项目名称&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>manage.py</strong>  是Django用于管理项目的管理集工具</p>
+<p><strong>init.py</strong>  初始化工具</p>
+<p><strong>settings.py</strong>  配置文件</p>
+<p><strong>urls.py</strong>  项目的url路由映射</p>
+<p><strong>wsgi.py</strong>  定义WSGI接口信息</p>
+<h5 id="三-设置Django"><a href="#三-设置Django" class="headerlink" title="三.设置Django"></a>三.设置Django</h5><p>1.修改settings.py配置</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置有权限访问的ip为全部</span></span><br><span class="line">ALLOWED_HOSTS = [<span class="string">'*'</span>]</span><br><span class="line"><span class="comment"># 和mysql数据链接</span></span><br><span class="line">DATABASES = &#123;</span><br><span class="line">    <span class="string">'default'</span>: &#123;</span><br><span class="line">        <span class="string">'ENGINE'</span>: <span class="string">'django.db.backends.mysql'</span>,</span><br><span class="line">        <span class="string">'NAME'</span>: <span class="string">'greencap'</span>,  <span class="comment"># mysql的库名</span></span><br><span class="line">        <span class="string">'USER'</span>: <span class="string">'root'</span>,      <span class="comment"># 用户名</span></span><br><span class="line">        <span class="string">'PASSWORD'</span>: <span class="string">'*****'</span>,</span><br><span class="line">        <span class="string">'HOST'</span>: <span class="string">'127.0.0.1'</span>,</span><br><span class="line">        <span class="string">'PORT'</span>: <span class="number">3306</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2.安装pymysql</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pymysql</span><br></pre></td></tr></table></figure>
+<p>3.配置init.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line">pymysql.install_as_MySQLdb()</span><br></pre></td></tr></table></figure>
+<p>4.迁移</p>
+<p><code>python manage.py migrate</code></p>
+<p>5.创建超级管理员命令</p>
+<p><code>manage.py createsuperuser</code></p>
+<p>6.运行Django项目</p>
+<p><code>python manage.py runserver  port/host:port</code></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/10/22/Django/" data-id="cjnl8cqkm0001tcvehlbv0hwp" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/10/22/day01/" data-id="cjnlqm77s0000wgve09xk6y8c" class="article-share-link">Share</a>
       
       
     </footer>
@@ -174,7 +206,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/09/30/hello-world/" data-id="cjnl8cqns0002tcveludzbort" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/09/30/hello-world/" data-id="cjnlqm79b0002wgvekpv26w6o" class="article-share-link">Share</a>
       
       
     </footer>
@@ -218,7 +250,7 @@
           </li>
         
           <li>
-            <a href="/2018/10/22/Django/">Django安装</a>
+            <a href="/2018/10/22/day01/">Django安装与配置</a>
           </li>
         
           <li>
