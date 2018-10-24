@@ -72,10 +72,19 @@
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/23/day02/">APP的创建与配置</a>
+    </h1>
+  
+
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <p>title: APP的创建与配置</p>
-<h5 id="一-创建应用app"><a href="#一-创建应用app" class="headerlink" title="一.创建应用app"></a>一.创建应用app</h5><p><code>python manage.py startapp &lt;文件名&gt;</code></p>
+        <h5 id="一-创建应用app"><a href="#一-创建应用app" class="headerlink" title="一.创建应用app"></a>一.创建应用app</h5><p><code>python manage.py startapp &lt;文件名&gt;</code></p>
 <h5 id="二-导入视图-创建连接"><a href="#二-导入视图-创建连接" class="headerlink" title="二.导入视图,创建连接"></a>二.导入视图,创建连接</h5><p>1.设置urls.py</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> &lt;文件名&gt; <span class="keyword">import</span> views</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    <span class="comment"># 127.0.0.1:8080/admin/</span></span><br><span class="line">    url(<span class="string">r'^admin/'</span>, admin.site.urls),</span><br><span class="line">    <span class="comment"># 127.0.0.1:8080/hello/</span></span><br><span class="line">    url(<span class="string">r'^hello/'</span>, views.hello),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 <p>2.在app下的views.py中添加方法</p>
@@ -246,7 +255,7 @@
       <ul>
         
           <li>
-            <a href="/2018/10/23/day02/">(no title)</a>
+            <a href="/2018/10/23/day02/">APP的创建与配置</a>
           </li>
         
           <li>
