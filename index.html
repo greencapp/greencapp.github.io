@@ -62,6 +62,48 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-day03" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/10/24/day03/" class="article-date">
+  <time datetime="2018-10-24T09:38:11.872Z" itemprop="datePublished">2018-10-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/24/day03/">DAY03</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="一-创建表之间的联系"><a href="#一-创建表之间的联系" class="headerlink" title="一.创建表之间的联系"></a>一.创建表之间的联系</h5><p>1.创建模型 models.py下添加学生信息类</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StudentInfo</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    phone = models.CharField(max_length=<span class="number">11</span>, null=<span class="keyword">True</span>)</span><br><span class="line">    address = models.CharField(max_length=<span class="number">100</span>)</span><br><span class="line">    <span class="comment"># OneToOneField 指定一对一关联关系(与学生类建立联系), 该字段定义在任何一个模型都可以</span></span><br><span class="line">    stu = models.OneToOneField(Student)</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        db_table = <span class="string">'student_info'</span></span><br></pre></td></tr></table></figure>
+<p>2.生成迁移文件并执行</p>
+<p><code>python manage.py makemigrations</code></p>
+<p><code>python manage.py migrate</code></p>
+<p>3.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/10/24/day03/" data-id="cjnn49te50000p8veil4e019i" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-day02" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/10/23/day02/" class="article-date">
@@ -86,26 +128,39 @@
       
         <h5 id="一-创建应用app"><a href="#一-创建应用app" class="headerlink" title="一.创建应用app"></a>一.创建应用app</h5><p><code>python manage.py startapp &lt;文件名&gt;</code></p>
 <h5 id="二-导入视图-创建连接"><a href="#二-导入视图-创建连接" class="headerlink" title="二.导入视图,创建连接"></a>二.导入视图,创建连接</h5><p>1.设置urls.py</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> &lt;文件名&gt; <span class="keyword">import</span> views</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    <span class="comment"># 127.0.0.1:8080/admin/</span></span><br><span class="line">    url(<span class="string">r'^admin/'</span>, admin.site.urls),</span><br><span class="line">    <span class="comment"># 127.0.0.1:8080/hello/</span></span><br><span class="line">    url(<span class="string">r'^hello/'</span>, views.hello),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> &lt;文件名&gt; <span class="keyword">import</span> views</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    <span class="comment"># 127.0.0.1:8080/admin/</span></span><br><span class="line">    url(<span class="string">r'^admin/'</span>, admin.site.urls),</span><br><span class="line">    <span class="comment"># 127.0.0.1:8080/hello/</span></span><br><span class="line">    url(<span class="string">r'^hello/'</span>, views.hello),</span><br><span class="line">    <span class="comment"># url(r^'&lt;方法名&gt;/', views.&lt;方法名&gt;)</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 <p>2.在app下的views.py中添加方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">from django.http import HttpResponse</span><br><span class="line"></span><br><span class="line">def hello(request):</span><br><span class="line">    return HttpResponse(&apos;hi,good morning!&apos;)</span><br></pre></td></tr></table></figure>
-<p>3.在浏览器输入对应地址可得到返回值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> HttpResponse</span><br><span class="line"></span><br><span class="line"><span class="comment"># def &lt;方法名&gt;(request):</span></span><br><span class="line">    <span class="comment"># return HttpResponse('hello!')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span><span class="params">(request)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">'hi,good morning!'</span>)</span><br></pre></td></tr></table></figure>
+<p>3.在浏览器输入对应地址可得到返回值’hi,good morning!’</p>
 <h5 id="三-创建models"><a href="#三-创建models" class="headerlink" title="三.创建models"></a>三.创建models</h5><p>1.在app下的models.py中添加模型</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    <span class="comment"># 定义s_name字段, varchar类型, 最长不超过六个字符, 唯一</span></span><br><span class="line">    s_name = models.CharField(max_length=<span class="number">6</span>, unique=<span class="keyword">True</span>)</span><br><span class="line">    <span class="comment"># 定义s_age字段, int类型</span></span><br><span class="line">    s_age = models.IntegerField(default=<span class="number">18</span>)</span><br><span class="line">    <span class="comment"># 定义s_gender字段, int类型</span></span><br><span class="line">    s_gender = models.BooleanField(default=<span class="number">1</span>)</span><br><span class="line">    <span class="comment"># 定义create_time字段, 创建时间</span></span><br><span class="line">    create_time = models.DateTimeField(auto_now_add=<span class="keyword">True</span>, null=<span class="keyword">True</span>)</span><br><span class="line">    <span class="comment"># 定义operate_time字段, 修改时间</span></span><br><span class="line">    operate_time = models.DateTimeField(auto_now=<span class="keyword">True</span>, null=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        <span class="comment"># 定义模型迁移到数据库中的表名</span></span><br><span class="line">        db_table = <span class="string">'student'</span></span><br></pre></td></tr></table></figure>
 <p>2.设置settings.py</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">INSTALLED_APPS = [</span><br><span class="line">    <span class="string">'django.contrib.admin'</span>,</span><br><span class="line">    <span class="string">'django.contrib.auth'</span>,</span><br><span class="line">    <span class="string">'django.contrib.contenttypes'</span>,</span><br><span class="line">    <span class="string">'django.contrib.sessions'</span>,</span><br><span class="line">    <span class="string">'django.contrib.messages'</span>,</span><br><span class="line">    <span class="string">'django.contrib.staticfiles'</span>,</span><br><span class="line">    <span class="comment"># 添加文件名</span></span><br><span class="line">    <span class="string">'app'</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">INSTALLED_APPS = [</span><br><span class="line">    <span class="string">'django.contrib.admin'</span>,</span><br><span class="line">    <span class="string">'django.contrib.auth'</span>,</span><br><span class="line">    <span class="string">'django.contrib.contenttypes'</span>,</span><br><span class="line">    <span class="string">'django.contrib.sessions'</span>,</span><br><span class="line">    <span class="string">'django.contrib.messages'</span>,</span><br><span class="line">    <span class="string">'django.contrib.staticfiles'</span>,</span><br><span class="line">    <span class="comment"># 添加文件名</span></span><br><span class="line">    <span class="string">'&lt;文件名&gt;'</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 <p>3.生成迁移文件0001_initial.py</p>
 <p><code>python manage.py makemigrations</code></p>
 <p>4.执行迁移文件</p>
 <p><code>python manage.py migrate</code></p>
-<h5 id="四-添加数据"><a href="#四-添加数据" class="headerlink" title="四.添加数据"></a>四.添加数据</h5><p>1.配置urls.py</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span><br><span class="line">    # 127.0.0.1:8080/admin/</span><br><span class="line">    url(r&apos;^admin/&apos;, admin.site.urls),</span><br><span class="line">    # 127.0.0.1:8080/hello/</span><br><span class="line">    url(r&apos;^hello/&apos;, views.hello),</span><br><span class="line">    # 127.0.0.1:8080/create_stu/</span><br><span class="line">    url(r&apos;^create_stu/&apos;, views.create_stu),</span><br><span class="line">    url(r&apos;^sel_stu/&apos;, views.sel_stu),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<p>2.</p>
+<h6 id="注-每在models-py添加类便执行以上两步"><a href="#注-每在models-py添加类便执行以上两步" class="headerlink" title="注:每在models.py添加类便执行以上两步"></a>注:每在models.py添加类便执行以上两步</h6><h5 id="四-添加数据"><a href="#四-添加数据" class="headerlink" title="四.添加数据"></a>四.添加数据</h5><p>1.添加urls.py连接地址urlpatterns</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span><br><span class="line">    <span class="comment"># 添加学生</span></span><br><span class="line">    url(<span class="string">r'^create_stu/'</span>, views.create_stu),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>2.在app的views.py里定义创建学生的方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 从app的models.py里导入学生类</span></span><br><span class="line"><span class="keyword">from</span> app.models <span class="keyword">import</span> Student</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_stu</span><span class="params">(request)</span>:</span></span><br><span class="line">    <span class="comment"># 方式1</span></span><br><span class="line">    stu = Student()</span><br><span class="line">    stu.s_name = <span class="string">'博丽灵梦'</span></span><br><span class="line">    stu.s_age = <span class="number">20</span></span><br><span class="line">    <span class="comment"># 保存到数据库中</span></span><br><span class="line">    stu.save()</span><br><span class="line">    <span class="comment"># 方式2 (可以用for循环)</span></span><br><span class="line">    Student.object.create(s_name=<span class="string">'雾雨魔理沙'</span>)</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">'创建成功!'</span>)</span><br></pre></td></tr></table></figure>
+<h5 id="五-查询"><a href="#五-查询" class="headerlink" title="五.查询"></a>五.查询</h5><p>1.urls.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span><br><span class="line">	<span class="comment"># 查询学生</span></span><br><span class="line">    url(<span class="string">r'^sel_stu/'</span>, views.sel_stu),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>2.views.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sel_stu</span><span class="params">(request)</span>:</span></span><br><span class="line">    <span class="comment"># all()查询所有的对象信息</span></span><br><span class="line">    stus = Student.objects.all()</span><br><span class="line">    <span class="comment"># filter() 过滤, 没有就会获得空值</span></span><br><span class="line">    stus = Student.objects.filter(s_name=<span class="string">'雾雨魔理沙'</span>)</span><br><span class="line">    <span class="comment"># first() 获取第一个; last() 获取最后一个</span></span><br><span class="line">    stus = Student.objects.filter(s_age=<span class="number">18</span>).first()</span><br><span class="line">    <span class="comment"># get() 获取对象, 不存在会报错</span></span><br><span class="line">    stus = Student.objects.get(s_age=<span class="number">18</span>)</span><br><span class="line">    <span class="comment"># 查询几个条件满足的学生信息</span></span><br><span class="line">    <span class="comment"># filter(条件1).filter(条件2); filter(条件1,条件2)</span></span><br><span class="line">    <span class="comment"># 模糊查询 (包含,开始,结尾)</span></span><br><span class="line">    stus = Student.objects.filter(s_name__contains=<span class="string">'魔'</span>)</span><br><span class="line">    stus = Student.objects.filter(s_name__startswith=<span class="string">'雾'</span>)</span><br><span class="line">    stus = Student.objects.filter(s_name__endswith=<span class="string">'沙'</span>)</span><br><span class="line">	<span class="comment"># 大于gt/gte 小于lt/lte</span></span><br><span class="line">    stus = Student.objects.filter(s_age__gt=<span class="number">18</span>)</span><br><span class="line">    stus = Student.objects.filter(s_age__gte=<span class="number">18</span>)</span><br><span class="line">    stus = Student.objects.filter(s_age__lt=<span class="number">18</span>)</span><br><span class="line">    stus = Student.objects.filter(s_age__lte=<span class="number">18</span>)</span><br><span class="line">    <span class="comment"># 排序 order_by()</span></span><br><span class="line">    <span class="comment"># 升序</span></span><br><span class="line">    stus = Student.objects.order_by(<span class="string">'id'</span>)</span><br><span class="line">    <span class="comment"># 降序(加个'-')</span></span><br><span class="line">    stus = Student.objects.order_by(<span class="string">'-id'</span>)</span><br><span class="line">    <span class="comment"># 查询不满足条件的数据 exclude()</span></span><br><span class="line">    stus = Student.objects.exclude(s_age=<span class="number">18</span>)</span><br><span class="line">    <span class="comment"># 计算统计的个数: count()</span></span><br><span class="line">    stus_count = stus.count()</span><br><span class="line">    <span class="comment"># values()</span></span><br><span class="line">    stus_values = stus.values()</span><br><span class="line">	<span class="comment"># id=pk</span></span><br><span class="line">    stus = Student.objects.filter(id=<span class="number">2</span>)</span><br><span class="line">    stus = Student.objects.filter(pk=<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<h5 id="六-删除"><a href="#六-删除" class="headerlink" title="六.删除"></a>六.删除</h5><p>1.urls.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span><br><span class="line">    <span class="comment"># 删除学生</span></span><br><span class="line">    url(<span class="string">r'^del_stu/'</span>, views.del_stu),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>2.views.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">del_stu</span><span class="params">(request)</span>:</span></span><br><span class="line">    <span class="comment"># 实现删除</span></span><br><span class="line">    Student.objects.filter(s_name=<span class="string">'博丽灵梦'</span>).delete()</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">'删除成功!'</span>)</span><br></pre></td></tr></table></figure>
+<h5 id="七-更新"><a href="#七-更新" class="headerlink" title="七.更新"></a>七.更新</h5><p>1.urls.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span><br><span class="line">	<span class="comment"># 更新学生</span></span><br><span class="line">    url(<span class="string">r'^update_stu/'</span>, views.update_stu),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>2.views.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">update_stu</span><span class="params">(request)</span>:</span></span><br><span class="line">    <span class="comment"># 实现更新 第一种</span></span><br><span class="line">    <span class="comment"># stu = Student.objects.filter(s_name='秦心').first()</span></span><br><span class="line">    <span class="comment"># Student.objects.get(s_name='秦心')</span></span><br><span class="line">    <span class="comment"># stu.s_name = '芙兰朵露'</span></span><br><span class="line">    <span class="comment"># stu.save()</span></span><br><span class="line">    <span class="comment"># 第二种</span></span><br><span class="line">    Student.objects.filter(s_name=<span class="string">'芙兰朵露'</span>).update(s_name=<span class="string">'蕾米莉亚'</span>)</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">'修改成功!'</span>)</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/10/23/day02/" data-id="cjnlqvmkc0001i0vei9r1v7n7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/10/23/day02/" data-id="cjnmi6eu40001pkve9acynfr0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -170,7 +225,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/10/22/day01/" data-id="cjnlqvmjk0000i0vefm47y8db" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/10/22/day01/" data-id="cjnmi6etu0000pkve1sgm37uu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -215,7 +270,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/09/30/hello-world/" data-id="cjnlqvmkj0002i0venaf5bu60" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/09/30/hello-world/" data-id="cjnmi6eua0002pkve81zuyhtr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -253,6 +308,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/10/24/day03/">DAY03</a>
+          </li>
         
           <li>
             <a href="/2018/10/23/day02/">APP的创建与配置</a>
