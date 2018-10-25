@@ -62,6 +62,72 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-day04" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/10/25/day04/" class="article-date">
+  <time datetime="2018-10-25T04:11:03.418Z" itemprop="datePublished">2018-10-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/25/day04/">模板的应用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="一-创建与配置"><a href="#一-创建与配置" class="headerlink" title="一.创建与配置"></a>一.创建与配置</h5><p>1.先进入django环境</p>
+<p>2.创建项目</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin startproject &lt;项目名称&gt;</span><br></pre></td></tr></table></figure>
+<p>3.创建应用(进入项目的目录)</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py startapp &lt;应用名称&gt;</span><br></pre></td></tr></table></figure>
+<p>4.在init.py中</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line">pymysql.install_as_MySQLdb()</span><br></pre></td></tr></table></figure>
+<p>5.新建文件夹<code>templates</code></p>
+<p>在此文件下创建<code>index.html</code> <code>base.html</code>  <code>base_main.html</code></p>
+<p>6.settings.py的配置</p>
+<p>a.在DATABASES 与mysql创建联系(之前知识)</p>
+<p>b.在TEMPLATES中的<code>DIRS</code>添加</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[os.path.jion(BASE_DIR, <span class="string">'templates'</span>)]</span><br></pre></td></tr></table></figure>
+<p>c.在INSTALLED_APPS中添加应用名称</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">INSTALLED_APPS = [</span><br><span class="line">  <span class="string">'&lt;应用名称&gt;'</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h5 id="二-创建应用的视图"><a href="#二-创建应用的视图" class="headerlink" title="二.创建应用的视图"></a>二.创建应用的视图</h5><p>1.在app文件下创建一个urls.py</p>
+<p>2.在之前urls.py添加应用的路由文件,例如</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span><br><span class="line">    <span class="comment">#127.0.0.1:8080/app/xxxxxx</span></span><br><span class="line">    url(<span class="string">r'^app/'</span>, include(<span class="string">'app.urls'</span>))</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>3.在app/urls.py上添加该应用的路由(此方法是为了应用有多个时方便整理查找)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.conf.urls <span class="keyword">import</span> url</span><br><span class="line"><span class="keyword">from</span> app <span class="keyword">import</span> views</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    url(<span class="string">r'^index/'</span>, views.index),</span><br><span class="line">    url(<span class="string">r'^all_stu'</span>, views.all_stu),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>4.在views.py添加视图方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">(request)</span>:</span></span><br><span class="line">    <span class="comment"># request.method前端发现后端的时候使用的是post还是get方法</span></span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">'GET'</span>:</span><br><span class="line">        <span class="comment"># 返回首页</span></span><br><span class="line">        <span class="keyword">return</span> render(request, <span class="string">'index.html'</span>)</span><br></pre></td></tr></table></figure>
+<h5 id="三-模板继承"><a href="#三-模板继承" class="headerlink" title="三.模板继承"></a>三.模板继承</h5><p>1.现有base.html如下(在base.html挖坑)</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span></span><br><span class="line">        &#123;% block title %&#125;</span><br><span class="line">        &#123;% endblock %&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    &#123;% block css %&#125;</span><br><span class="line">    &#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line">    &#123;% block js %&#125;</span><br><span class="line">    &#123;% endblock %&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    &#123;% block content %&#125;</span><br><span class="line">    &#123;% endblock %&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>2.要index.html继承base.html用</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends 'base.html' %&#125;</span><br></pre></td></tr></table></figure>
+<p>3.在index.html填坑</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--标题--&gt;</span></span><br><span class="line">&#123;% block title %&#125;&#123;% endblock %&#125;</span><br><span class="line"><span class="comment">&lt;!--样式--&gt;</span></span><br><span class="line">&#123;% block css %&#125;&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block js %&#125;&#123;% endblock %&#125;</span><br><span class="line"><span class="comment">&lt;!--内容--&gt;</span></span><br><span class="line">&#123;% block content %&#125;&#123;% endblock %&#125;</span><br></pre></td></tr></table></figure>
+<p>4.继承标签, 不仅可以覆盖父模板,还可以在其基础上追加内容</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% block js %&#125;</span><br><span class="line">	&#123;&#123; block.super &#125;&#125;</span><br><span class="line">&#123;% endblock %&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/10/25/day04/" data-id="cjnoljjwj0000k4veu57gbgmv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-day03" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/10/24/day03/" class="article-date">
@@ -94,7 +160,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/10/24/day03/" data-id="cjnn49te50000p8veil4e019i" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/10/24/day03/" data-id="cjnn4aj45000238ve6iaa5iqr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -160,7 +226,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/10/23/day02/" data-id="cjnmi6eu40001pkve9acynfr0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/10/23/day02/" data-id="cjnn4aj3z000138vemwuizmom" class="article-share-link">Share</a>
       
       
     </footer>
@@ -225,7 +291,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/10/22/day01/" data-id="cjnmi6etu0000pkve1sgm37uu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/10/22/day01/" data-id="cjnn4aj3m000038vekrq7qknm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -270,7 +336,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/09/30/hello-world/" data-id="cjnmi6eua0002pkve81zuyhtr" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/09/30/hello-world/" data-id="cjnn4aj48000338vew66rvoxm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -308,6 +374,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/10/25/day04/">模板的应用</a>
+          </li>
         
           <li>
             <a href="/2018/10/24/day03/">DAY03</a>
